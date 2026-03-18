@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-THON 2026 — Telekinesis | Generative AI Hackathon</title>
+  <meta name="description" content="AI-THON 2026 by Telekinesis — A premier hackathon on Generative AI, Agentic AI, LLMs, Machine Learning & Data Science. March 25, 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Particle Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <img src="logo.png" alt="Telekinesis 2026" id="nav-logo-img" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#rounds" class="nav-link">Rounds</a></li>
+        <li><a href="#prizes" class="nav-link">Prizes</a></li>
+        <li><a href="#timeline" class="nav-link">Timeline</a></li>
+        <li><a href="#rules" class="nav-link">Rules</a></li>
+        <li>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSetDWnpq4J89qaga7Q79-ENruqy23wexcN2jtTQ0kFAUP8_FQ/viewform" 
+             target="_blank" class="nav-cta" id="nav-register-btn">Register Now</a>
+        </li>
+      </ul>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#about" class="mobile-link">About</a>
+    <a href="#rounds" class="mobile-link">Rounds</a>
+    <a href="#prizes" class="mobile-link">Prizes</a>
+    <a href="#timeline" class="mobile-link">Timeline</a>
+    <a href="#rules" class="mobile-link">Rules</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSetDWnpq4J89qaga7Q79-ENruqy23wexcN2jtTQ0kFAUP8_FQ/viewform"
+       target="_blank" class="mobile-link register-mobile">Register Now</a>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="hero-badge glitch-badge" data-text="TELEKINESIS PRESENTS">TELEKINESIS PRESENTS</div>
+      <h1 class="hero-title">
+        <span class="glitch" data-text="AI-THON">AI-THON</span>
+        <span class="year-badge">2026</span>
+      </h1>
+      <p class="hero-subtitle">
+        Generative AI &bull; Agentic AI &bull; LLM &bull; Machine Learning &bull; Data Science
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          <span>25 March 2026</span>
+        </div>
+        <div class="meta-divider"></div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>11:30 AM – 3:00 PM</span>
+        </div>
+        <div class="meta-divider"></div>
+        <div class="meta-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          <span>2 – 4 Members</span>
+        </div>
+      </div>
+      <div class="hero-cta-group">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSetDWnpq4J89qaga7Q79-ENruqy23wexcN2jtTQ0kFAUP8_FQ/viewform"
+           target="_blank" class="btn-primary" id="hero-register-btn">
+          <span class="btn-text">Register Your Team</span>
+          <span class="btn-glow"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="#about" class="btn-secondary">
+          <span>Explore Event</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </a>
+      </div>
+
+      <!-- Prize Pool Teaser -->
+      <div class="prize-teaser">
+        <span class="prize-label">Total Prize Pool</span>
+        <span class="prize-amount">₹5,000</span>
+      </div>
+    </div>
+
+    <!-- Animated Countdown -->
+    <div class="countdown-wrapper">
+      <p class="countdown-label">Event Starts In</p>
+      <div class="countdown" id="countdown">
+        <div class="countdown-block">
+          <span class="count-num" id="days">00</span>
+          <span class="count-unit">Days</span>
+        </div>
+        <span class="count-sep">:</span>
+        <div class="countdown-block">
+          <span class="count-num" id="hours">00</span>
+          <span class="count-unit">Hours</span>
+        </div>
+        <span class="count-sep">:</span>
+        <div class="countdown-block">
+          <span class="count-num" id="minutes">00</span>
+          <span class="count-unit">Minutes</span>
+        </div>
+        <span class="count-sep">:</span>
+        <div class="countdown-block">
+          <span class="count-num" id="seconds">00</span>
+          <span class="count-unit">Seconds</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT SECTION ===== -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">About The Event</span>
+        <h2 class="section-title">What is <span class="gradient-text">AI-THON?</span></h2>
+      </div>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>AI-THON 2026 is a premier hackathon where innovation meets intelligence. Teams will conceptualize, design, and present groundbreaking AI-powered solutions in a fast-paced, high-energy environment.</p>
+          <p>Whether you're building with Generative AI, deploying autonomous agents, fine-tuning LLMs, crafting Machine Learning models, or exploring Data Science — this is your arena to shine.</p>
+          <div class="theme-tags">
+            <span class="theme-tag">🤖 Generative AI</span>
+            <span class="theme-tag">🕸️ Agentic AI</span>
+            <span class="theme-tag">🧠 LLM</span>
+            <span class="theme-tag">📊 Machine Learning</span>
+            <span class="theme-tag">📈 Data Science</span>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-icon">🏆</span>
+            <span class="stat-num" data-target="5000">0</span>
+            <span class="stat-label">Prize Pool (₹)</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">⏱️</span>
+            <span class="stat-num" data-target="15">0</span>
+            <span class="stat-label">Min Presentation</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">👥</span>
+            <span class="stat-num" data-target="12">0</span>
+            <span class="stat-label">Finalist Teams</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🎯</span>
+            <span class="stat-num" data-target="2">0</span>
+            <span class="stat-label">Competition Rounds</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ROUNDS SECTION ===== -->
+  <section id="rounds" class="section section-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Competition Structure</span>
+        <h2 class="section-title">Two Rounds to <span class="gradient-text">Victory</span></h2>
+      </div>
+      <div class="rounds-grid">
+
+        <!-- Round 1 -->
+        <div class="round-card reveal" id="round-1-card">
+          <div class="round-number">01</div>
+          <div class="round-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="6" y="4" width="36" height="44" rx="3"></rect>
+              <line x1="14" y1="16" x2="34" y2="16"></line>
+              <line x1="14" y1="24" x2="34" y2="24"></line>
+              <line x1="14" y1="32" x2="26" y2="32"></line>
+              <polygon points="34,30 42,36 34,42" fill="currentColor" stroke="none"></polygon>
+            </svg>
+          </div>
+          <h3 class="round-title">PPT Submission</h3>
+          <span class="round-tag screening">Screening Round</span>
+          <div class="round-deadline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>Deadline: 22 March 2026, 11:59 PM</span>
+          </div>
+          <p class="round-desc">Submit your project presentation before the deadline. Judges will review all submissions and select the top 12 teams for the final presentation.</p>
+          <ul class="round-rules">
+            <li>Submit PPT/PPTX before deadline</li>
+            <li>10–15 slides for clarity</li>
+            <li>Cover: Problem, Solution, Tech Stack, Expected Results</li>
+            <li>Every project must have at least one unique feature</li>
+            <li>No plagiarism — both teams disqualified if found copying</li>
+          </ul>
+          <div class="round-footer">
+            <span class="round-outcome">Top 12 teams advance</span>
+          </div>
+        </div>
+
+        <!-- Round 2 -->
+        <div class="round-card reveal highlight-card" id="round-2-card">
+          <div class="round-number">02</div>
+          <div class="round-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="24,4 30,18 46,18 34,28 38,44 24,34 10,44 14,28 2,18 18,18"></polygon>
+            </svg>
+          </div>
+          <h3 class="round-title">Final Presentation</h3>
+          <span class="round-tag final">Final Round</span>
+          <div class="round-deadline">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>25 March 2026 — 11:30 AM</span>
+          </div>
+          <p class="round-desc">Top 12 teams present live to judges. Winners announced at the conclusion of the event.</p>
+          <div class="time-breakdown">
+            <div class="time-seg">
+              <span class="seg-time">5 min</span>
+              <span class="seg-label">Presentation</span>
+            </div>
+            <span class="seg-sep">+</span>
+            <div class="time-seg">
+              <span class="seg-time">5 min</span>
+              <span class="seg-label">Live Demo</span>
+            </div>
+            <span class="seg-sep">+</span>
+            <div class="time-seg">
+              <span class="seg-time">5 min</span>
+              <span class="seg-label">Q&A</span>
+            </div>
+          </div>
+          <ul class="round-rules">
+            <li>Arrive by 11:15 AM at the venue</li>
+            <li>Bring your own laptop + pen drive backup</li>
+            <li>Live working demo is required</li>
+            <li>Exceeding 15 min may result in score deductions</li>
+          </ul>
+          <div class="round-footer">
+            <span class="round-outcome">Winners announced here!</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRIZES SECTION ===== -->
+  <section id="prizes" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Reward Your Brilliance</span>
+        <h2 class="section-title">Prize <span class="gradient-text">Pool</span></h2>
+        <p class="section-subtitle">Total Prize Pool: ₹5,000</p>
+      </div>
+      <div class="prizes-grid reveal">
+
+        <!-- 2nd Place (left) -->
+        <div class="prize-card second-place">
+          <div class="prize-position-badge">2<sup>nd</sup></div>
+          <div class="prize-medal">🥈</div>
+          <h3 class="prize-rank">Runner-Up</h3>
+          <div class="prize-amount-display">₹2,000</div>
+          <ul class="prize-perks">
+            <li>💎 Certificate</li>
+            <li>🎉 Exclusive Stickers</li>
+          </ul>
+        </div>
+
+        <!-- 1st Place (center, elevated) -->
+        <div class="prize-card first-place">
+          <div class="prize-crown">👑</div>
+          <div class="prize-position-badge gold">1<sup>st</sup></div>
+          <div class="prize-medal">🥇</div>
+          <h3 class="prize-rank">Champion</h3>
+          <div class="prize-amount-display gold-text">₹3,000</div>
+          <ul class="prize-perks">
+            <li>🏆 Trophy</li>
+            <li>💎 Certificate</li>
+            <li>🎉 Exclusive Stickers</li>
+          </ul>
+          <div class="prize-glow-ring"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== JUDGING CRITERIA ===== -->
+  <section id="judging" class="section section-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">How You'll Be Scored</span>
+        <h2 class="section-title">Judging <span class="gradient-text">Criteria</span></h2>
+      </div>
+      <div class="criteria-grid reveal">
+        <div class="criteria-card">
+          <div class="criteria-icon">💡</div>
+          <div class="criteria-num">01</div>
+          <h3>Innovation & Creativity</h3>
+          <p>Originality of the concept and how creatively you apply AI technologies to solve real problems.</p>
+        </div>
+        <div class="criteria-card">
+          <div class="criteria-icon">⚙️</div>
+          <div class="criteria-num">02</div>
+          <h3>Technical Complexity</h3>
+          <p>Depth and sophistication of the technical implementation, including model architecture and system design.</p>
+        </div>
+        <div class="criteria-card">
+          <div class="criteria-icon">🌍</div>
+          <div class="criteria-num">03</div>
+          <h3>Practical Use Case & Impact</h3>
+          <p>Real-world applicability, business value, and the potential positive impact of your solution.</p>
+        </div>
+        <div class="criteria-card">
+          <div class="criteria-icon">🎤</div>
+          <div class="criteria-num">04</div>
+          <h3>Presentation Quality</h3>
+          <p>Clarity, structure, and persuasiveness of your slides and live demonstration.</p>
+        </div>
+        <div class="criteria-card">
+          <div class="criteria-icon">🗣️</div>
+          <div class="criteria-num">05</div>
+          <h3>Q&A Responses</h3>
+          <p>Depth of knowledge and ability to confidently answer judges' questions about your project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TIMELINE SECTION ===== -->
+  <section id="timeline" class="section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Mark Your Calendar</span>
+        <h2 class="section-title">Important <span class="gradient-text">Dates</span></h2>
+      </div>
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-dot active-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">22 March 2026 — 11:59 PM</span>
+            <h4>PPT Submission Closes</h4>
+            <p>Submit your project presentation before the deadline.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">23–24 March 2026</span>
+            <h4>Screening & Shortlisting</h4>
+            <p>Judges review all submissions and select the top 12 teams.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">25 March 2026 — 11:15 AM</span>
+            <h4>Teams Report at Venue</h4>
+            <p>Arrive 15 minutes before the event starts with valid ID proof.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">25 March 2026 — 11:30 AM</span>
+            <h4>Event Begins</h4>
+            <p>Final presentations begin. Top 12 teams compete for glory.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot star-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">25 March 2026 — 3:00 PM</span>
+            <h4>Winners Announced & Prizes Distributed</h4>
+            <p>Champions crowned. Prizes and certificates awarded!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RULES SECTION ===== -->
+  <section id="rules" class="section section-dark">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Play Fair, Win Big</span>
+        <h2 class="section-title">General <span class="gradient-text">Rules</span></h2>
+      </div>
+      <div class="rules-grid reveal">
+        <div class="rule-item">
+          <div class="rule-icon">👥</div>
+          <p>Teams must have <strong>2 to 4 members</strong>.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">📋</div>
+          <p>Registration must be completed <strong>before the PPT submission deadline</strong>.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🚫</div>
+          <p>Members <strong>cannot register for more than one team</strong>. Dual registration results in disqualification.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">📁</div>
+          <p><strong>Only one submission per team</strong> is allowed.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🏟️</div>
+          <p>All team members <strong>must attend the final event day</strong>.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">⏰</div>
+          <p><strong>Late submissions will not be accepted</strong> under any circumstances.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">🪪</div>
+          <p>Participants must carry <strong>valid ID proof</strong> (college ID) on the event day.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">⚖️</div>
+          <p>Misbehavior or misconduct <strong>will lead to disqualification</strong>.</p>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon">👨‍⚖️</div>
+          <p><strong>Judges' decisions are final</strong> and binding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REGISTER CTA ===== -->
+  <section id="register" class="section register-section">
+    <div class="register-bg-glow"></div>
+    <div class="container">
+      <div class="register-content reveal">
+        <h2 class="register-title">Ready to <span class="gradient-text">Dominate?</span></h2>
+        <p class="register-subtitle">
+          Register your team now before spots fill up. The PPT submission deadline is <strong>22 March 2026</strong>.
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSetDWnpq4J89qaga7Q79-ENruqy23wexcN2jtTQ0kFAUP8_FQ/viewform"
+           target="_blank" class="btn-primary btn-large" id="register-btn">
+          <span class="btn-text">Register Your Team Now</span>
+          <span class="btn-glow"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <p class="register-note">Free to participate · 2 to 4 members per team</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <img src="logo.png" alt="Telekinesis 2026" class="footer-logo" />
+        <p class="footer-tagline">AI-THON 2026 — Where Intelligence Meets Innovation</p>
+        <p class="footer-copy">&copy; 2026 Telekinesis. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
