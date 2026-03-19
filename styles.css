@@ -810,6 +810,60 @@ body {
   letter-spacing: 0.04em;
 }
 
+/* PPT Download Note */
+.ppt-download-note {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px dashed rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+}
+.ppt-note-icon { font-size: 1.4rem; flex-shrink: 0; }
+.ppt-note-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.ppt-note-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--purple);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.ppt-note-desc {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.ppt-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: 50px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: var(--purple);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.ppt-download-btn svg { width: 14px; height: 14px; }
+.ppt-download-btn:hover {
+  background: rgba(139, 92, 246, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(139, 92, 246, 0.2);
+}
+
 /* Time Breakdown */
 .time-breakdown {
   display: flex;
