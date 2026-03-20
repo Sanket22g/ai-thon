@@ -113,14 +113,24 @@
   window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
   // =============================================
-  // 2. NAVBAR SCROLL EFFECT
+  // 2. NAVBAR SCROLL EFFECT & PARALLAX
   // =============================================
   const navbar    = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
+  const parallaxElements = document.querySelectorAll('[data-parallax]');
 
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 60);
+    const scrollY = window.scrollY;
+    navbar.classList.toggle('scrolled', scrollY > 60);
+
+    // Parallax update
+    requestAnimationFrame(() => {
+      parallaxElements.forEach(el => {
+        const speed = parseFloat(el.getAttribute('data-parallax'));
+        el.style.transform = `translateY(${scrollY * speed}px)`;
+      });
+    });
   });
 
   hamburger.addEventListener('click', () => {
@@ -283,19 +293,70 @@
   });
 
   // =============================================
-  // 8. TILT EFFECT ON CARDS (subtle)
+  // 8. HERO 3D TILT EFFECT
+  // =============================================
+  const heroContent = document.querySelector('.hero-content');
+  if (heroContent) {
+    document.addEventListener('mousemove', (e) => {
+      const x = (window.innerWidth / 2 - e.clientX) / 40;
+      const y = (window.innerHeight / 2 - e.clientY) / 40;
+      // Slightly rotate the hero content based on mouse position
+      heroContent.style.transform = `perspective(1000px) rotateY(${-x}deg) rotateX(${y}deg)`;
+    });
+  }
+
+  // Magnetic Button Logic
+  document.querySelectorAll('.btn-primary, .btn-secondary').forEach(btn => {
+    btn.classList.add('magnetic-btn');
+    btn.addEventListener('mousemove', function (e) {
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX - rect.left) - rect.width / 2;
+      const y = (e.clientY - rect.top) - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    });
+    btn.addEventListener('mouseleave', function () {
+      btn.style.transform = '';
+    });
+  });
+
+  // =============================================
+  // 8. ADVANCED TILT EFFECT ON CARDS (With Glare)
   // =============================================
   document.querySelectorAll('.prize-card, .round-card, .criteria-card').forEach(card => {
+    // Inject glare element dynamically
+    const glare = document.createElement('div');
+    glare.className = 'glare';
+    card.appendChild(glare);
+
     card.addEventListener('mousemove', function (e) {
       const rect = card.getBoundingClientRect();
-      const cx = rect.left + rect.width  / 2;
-      const cy = rect.top  + rect.height / 2;
-      const dx = (e.clientX - cx) / (rect.width  / 2);
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / (rect.width / 2);
       const dy = (e.clientY - cy) / (rect.height / 2);
-      card.style.transform = `perspective(800px) rotateY(${dx * 4}deg) rotateX(${-dy * 4}deg) translateY(-4px)`;
+
+      // Card tilt
+      card.style.transform = `perspective(800px) rotateY(${dx * 6}deg) rotateX(${-dy * 6}deg) translateY(-8px) scale(1.02)`;
+
+      // Glare position
+      glare.style.background = `radial-gradient(circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(255,255,255,0.15), transparent 60%)`;
+      glare.style.opacity = '1';
+
+      // Inner elements pop-out
+      const icons = card.querySelectorAll('.round-icon, .prize-medal, .prize-crown, .criteria-icon');
+      icons.forEach(icon => {
+        icon.style.transform = 'translateZ(40px)';
+      });
     });
+
     card.addEventListener('mouseleave', function () {
       card.style.transform = '';
+      glare.style.opacity = '0';
+      
+      const icons = card.querySelectorAll('.round-icon, .prize-medal, .prize-crown, .criteria-icon');
+      icons.forEach(icon => {
+        icon.style.transform = '';
+      });
     });
   });
 
@@ -322,9 +383,63 @@
   });
 
   // =============================================
-  // INIT
+  // 9. CUTE AI INTERACTION (Eye Tracking)
+  // =============================================
+  const aiOrb = document.querySelector('.ai-orb');
+  const aiEyes = document.querySelectorAll('.ai-eye');
+  
+  if (aiOrb && aiEyes.length) {
+    document.addEventListener('mousemove', (e) => {
+      const rect = aiOrb.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      
+      const angle = Math.atan2(dy, dx);
+      // Max movement of 4px
+      const dist = Math.min(Math.sqrt(dx*dx + dy*dy) / 40, 4); 
+      
+      const tx = Math.cos(angle) * dist;
+      const ty = Math.sin(angle) * dist;
+      
+      aiEyes.forEach(eye => {
+        eye.style.setProperty('--tx', `${tx}px`);
+        eye.style.setProperty('--ty', `${ty}px`);
+      });
+    });
+    
+    aiOrb.addEventListener('click', () => {
+      // Little jump on click
+      aiOrb.style.transform = 'scale(1.1) translateY(-15px)';
+      setTimeout(() => {
+        aiOrb.style.transform = '';
+      }, 200);
+      
+      // Scroll to register
+      const regSection = document.getElementById('register');
+      if (regSection) {
+        regSection.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.open('https://docs.google.com/forms/d/e/1FAIpQLSetDWnpq4J89qaga7Q79-ENruqy23wexcN2jtTQ0kFAUP8_FQ/viewform', '_blank');
+      }
+    });
+  }
+
+  // =============================================
+  // INIT & PRELOADER
   // =============================================
   window.addEventListener('load', () => {
+    // Hide preloader
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      // Small artificial delay for visual effect
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+      }, 600);
+    }
+    
     initCanvas();
   });
 
