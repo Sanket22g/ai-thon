@@ -129,6 +129,13 @@
       parallaxElements.forEach(el => {
         const speed = parseFloat(el.getAttribute('data-parallax'));
         el.style.transform = `translateY(${scrollY * speed}px)`;
+        
+        // Prevent overlap by fading out the hero wrapper as it scrolls down
+        if (el.classList.contains('hero-parallax-wrapper')) {
+          const opacity = Math.max(1 - (scrollY / 350), 0);
+          el.style.opacity = opacity;
+          el.style.pointerEvents = opacity === 0 ? 'none' : 'auto';
+        }
       });
     });
   });
