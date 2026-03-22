@@ -432,6 +432,19 @@
         window.open('https://docs.google.com/forms/d/e/1FAIpQLSetDWnpq4J89qaga7Q79-ENruqy23wexcN2jtTQ0kFAUP8_FQ/viewform', '_blank');
       }
     });
+
+    // Rotate AI messages every 3 seconds (starts after bubble appears)
+    const aiMessages = document.querySelectorAll('.ai-msg');
+    let currentMsg = 0;
+    if (aiMessages.length > 1) {
+      setTimeout(() => {
+        setInterval(() => {
+          aiMessages[currentMsg].classList.remove('ai-msg-active');
+          currentMsg = (currentMsg + 1) % aiMessages.length;
+          aiMessages[currentMsg].classList.add('ai-msg-active');
+        }, 3000);
+      }, 2600); // wait for bubble to finish appearing
+    }
   }
 
   // =============================================
