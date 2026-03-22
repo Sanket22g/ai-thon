@@ -778,6 +778,40 @@ body {
   margin-bottom: 16px;
 }
 .round-deadline svg { width: 16px; height: 16px; color: var(--cyan); flex-shrink: 0; }
+
+/* Deadline Updated Highlight */
+.deadline-updated {
+  background: rgba(255, 107, 53, 0.08);
+  border: 1px solid rgba(255, 107, 53, 0.4);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  animation: deadlinePulse 2.5s ease-in-out infinite;
+  color: #ff8c5a;
+  font-weight: 600;
+}
+@keyframes deadlinePulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 53, 0); border-color: rgba(255, 107, 53, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(255, 107, 53, 0); border-color: rgba(255, 107, 53, 0.85); }
+}
+.deadline-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 50px;
+  background: rgba(255, 107, 53, 0.2);
+  border: 1px solid rgba(255, 107, 53, 0.5);
+  color: #ff8c5a;
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: badgePop 1.4s ease-in-out infinite;
+}
+@keyframes badgePop {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.12); opacity: 0.8; }
+}
 .round-desc {
   color: var(--text-secondary);
   font-size: 0.95rem;
