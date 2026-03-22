@@ -439,11 +439,19 @@
     if (aiMessages.length > 1) {
       setTimeout(() => {
         setInterval(() => {
+          // Hide current
           aiMessages[currentMsg].classList.remove('ai-msg-active');
+          // Advance
           currentMsg = (currentMsg + 1) % aiMessages.length;
-          aiMessages[currentMsg].classList.add('ai-msg-active');
+          const next = aiMessages[currentMsg];
+          // Force animation replay by resetting
+          next.style.animation = 'none';
+          next.classList.add('ai-msg-active');
+          // Trigger reflow then re-enable animation
+          void next.offsetWidth;
+          next.style.animation = '';
         }, 3000);
-      }, 2600); // wait for bubble to finish appearing
+      }, 2200); // wait for bubble to finish appearing
     }
   }
 
