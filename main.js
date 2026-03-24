@@ -433,31 +433,10 @@
       }
     });
 
-    // Rotate AI messages every 4 seconds (starts after bubble appears)
-    const aiMessages = document.querySelectorAll('.ai-msg');
-    let currentMsg = 0;
-    if (aiMessages.length > 1) {
-      setTimeout(() => {
-        setInterval(() => {
-          // Hide current
-          aiMessages[currentMsg].classList.remove('ai-msg-active');
-          // Advance
-          currentMsg = (currentMsg + 1) % aiMessages.length;
-          const next = aiMessages[currentMsg];
-          // Force animation replay by resetting
-          next.style.animation = 'none';
-          next.classList.add('ai-msg-active');
-          // Trigger reflow then re-enable animation
-          void next.offsetWidth;
-          next.style.animation = '';
-
-          // 🎉 Fire celebration confetti on congratulations message (index 2)
-          if (currentMsg === 2) {
-            fireConfetti();
-          }
-        }, 4000);
-      }, 2200); // wait for bubble to finish appearing
-    }
+    // 🎉 Fire celebration confetti shortly after load (congratulations message is always shown)
+    setTimeout(() => {
+      fireConfetti();
+    }, 2800);
   }
 
   // =============================================
