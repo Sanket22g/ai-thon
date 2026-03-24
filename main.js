@@ -433,7 +433,7 @@
       }
     });
 
-    // Rotate AI messages every 3 seconds (starts after bubble appears)
+    // Rotate AI messages every 4 seconds (starts after bubble appears)
     const aiMessages = document.querySelectorAll('.ai-msg');
     let currentMsg = 0;
     if (aiMessages.length > 1) {
@@ -450,9 +450,71 @@
           // Trigger reflow then re-enable animation
           void next.offsetWidth;
           next.style.animation = '';
-        }, 3000);
+
+          // 🎉 Fire celebration confetti on congratulations message (index 2)
+          if (currentMsg === 2) {
+            fireConfetti();
+          }
+        }, 4000);
       }, 2200); // wait for bubble to finish appearing
     }
+  }
+
+  // =============================================
+  // 10. CELEBRATION CONFETTI
+  // =============================================
+  function fireConfetti() {
+    const cv = document.getElementById('celebration-canvas');
+    if (!cv) return;
+    cv.width = window.innerWidth;
+    cv.height = window.innerHeight;
+    cv.classList.add('active');
+    const ctx2 = cv.getContext('2d');
+    const colors = ['#00d4ff', '#8b5cf6', '#fbbf24', '#ec4899', '#22c55e', '#ff6b35', '#ffffff'];
+    const pieces = Array.from({ length: 160 }, () => ({
+      x: Math.random() * cv.width,
+      y: Math.random() * cv.height - cv.height,
+      w: Math.random() * 10 + 5,
+      h: Math.random() * 6 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 4,
+      vy: Math.random() * 4 + 2,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.2,
+      alpha: 1,
+    }));
+
+    const startTime = performance.now();
+    const DURATION = 4000;
+
+    function drawConfetti(ts) {
+      const elapsed = ts - startTime;
+      const progress = elapsed / DURATION;
+      ctx2.clearRect(0, 0, cv.width, cv.height);
+      pieces.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.angle += p.spin;
+        p.vy += 0.05; // gravity
+        p.alpha = Math.max(0, 1 - Math.max(0, progress - 0.6) / 0.4);
+
+        ctx2.save();
+        ctx2.globalAlpha = p.alpha;
+        ctx2.translate(p.x, p.y);
+        ctx2.rotate(p.angle);
+        ctx2.fillStyle = p.color;
+        ctx2.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx2.restore();
+      });
+
+      if (elapsed < DURATION) {
+        requestAnimationFrame(drawConfetti);
+      } else {
+        cv.classList.remove('active');
+        ctx2.clearRect(0, 0, cv.width, cv.height);
+      }
+    }
+    requestAnimationFrame(drawConfetti);
   }
 
   // =============================================
