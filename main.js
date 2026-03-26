@@ -449,22 +449,22 @@
     cv.height = window.innerHeight;
     cv.classList.add('active');
     const ctx2 = cv.getContext('2d');
-    const colors = ['#00d4ff', '#8b5cf6', '#fbbf24', '#ec4899', '#22c55e', '#ff6b35', '#ffffff'];
-    const pieces = Array.from({ length: 160 }, () => ({
+    const colors = ['#00d4ff', '#8b5cf6', '#fbbf24', '#ec4899', '#22c55e', '#ff6b35', '#ffffff', '#ff0000', '#00ff00', '#0000ff'];
+    const pieces = Array.from({ length: 400 }, () => ({
       x: Math.random() * cv.width,
       y: Math.random() * cv.height - cv.height,
-      w: Math.random() * 10 + 5,
-      h: Math.random() * 6 + 3,
+      w: Math.random() * 12 + 6,
+      h: Math.random() * 8 + 4,
       color: colors[Math.floor(Math.random() * colors.length)],
-      vx: (Math.random() - 0.5) * 4,
-      vy: Math.random() * 4 + 2,
+      vx: (Math.random() - 0.5) * 6,
+      vy: Math.random() * 5 + 3,
       angle: Math.random() * Math.PI * 2,
-      spin: (Math.random() - 0.5) * 0.2,
+      spin: (Math.random() - 0.5) * 0.4,
       alpha: 1,
     }));
 
     const startTime = performance.now();
-    const DURATION = 4000;
+    const DURATION = 8000;
 
     function drawConfetti(ts) {
       const elapsed = ts - startTime;
@@ -475,13 +475,26 @@
         p.y += p.vy;
         p.angle += p.spin;
         p.vy += 0.05; // gravity
-        p.alpha = Math.max(0, 1 - Math.max(0, progress - 0.6) / 0.4);
+        
+        // Continuous spawn during the animation
+        if (p.y > cv.height && progress < 0.8) {
+            p.y = -10;
+            p.x = Math.random() * cv.width;
+            p.vy = Math.random() * 5 + 3;
+        }
+
+        p.alpha = Math.max(0, 1 - Math.max(0, progress - 0.8) / 0.2);
 
         ctx2.save();
         ctx2.globalAlpha = p.alpha;
         ctx2.translate(p.x, p.y);
         ctx2.rotate(p.angle);
         ctx2.fillStyle = p.color;
+        
+        // Add glow for "super" effect
+        ctx2.shadowBlur = 10;
+        ctx2.shadowColor = p.color;
+
         ctx2.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
         ctx2.restore();
       });
